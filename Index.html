@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iglesia Lighting</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="intro">
+    <div class="light-bg"></div>
+    <div class="intro-content">
+      <h1 class="lighting-text">Lighting</h1>
+      <div class="line"></div>
+      <p class="intro-sub">La iglesia de la ciudad</p>
+    </div>
+  </div>
+
+  <nav id="navbar">
+    <div class="logo">
+      <img src="LOGOS/PRINBL.png" alt="Lighting Logo" class="logo-img">
+    </div>
+
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <ul id="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#versiculo">Versículo</a></li>
+      <li><a href="#horarios">Horarios</a></li>
+      <li><a href="#ubicacion">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <h1 class="hero-title">Iglesia Lighting</h1>
+      <p class="hero-desc">
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+      </p>
+      <div class="hero-buttons">
+        <a href="#horarios" class="btn">Ver horarios</a>
+        <a href="#" class="btn-outline">Ver transmisión</a>
+      </div>
+    </div>
+  </section>
+  
+  <section id="esencia" class="light-section">
+    <div class="container-narrow reveal">
+      <h2>Lo que encontrarás aquí</h2>
+      <p class="section-subtitle">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+    </div>
+
+    <div class="grid features-grid">
+      <div class="card feature-card reveal">
+        <div class="feature-icon">🤝</div>
+        <h3>Título Opción 1</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+      </div>
+
+      <div class="card feature-card reveal" style="transition-delay: 0.1s;">
+        <div class="feature-icon">🎸</div>
+        <h3>Título Opción 2</h3>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+      </div>
+
+      <div class="card feature-card reveal" style="transition-delay: 0.2s;">
+        <div class="feature-icon">💡</div>
+        <h3>Título Opción 3</h3>
+        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="versiculo" class="glass-section">
+    <div class="container-narrow">
+      <h2 class="reveal">Versículo del día</h2>
+      <div class="card glass-card reveal" id="versiculoTexto">
+        <div class="spinner"></div> <span>Cargando versículo...</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="horarios" class="light-section">
+    <h2 class="reveal">Nuestros horarios</h2>
+    <div class="grid">
+      <div class="card schedule-card reveal">
+        <div class="card-icon">☀️</div>
+        <h3>Domingo</h3>
+        <p class="time">11:00 AM</p>
+        <span class="tag">Reunión General</span>
+      </div>
+
+      <div class="card schedule-card reveal">
+        <div class="card-icon">🌙</div>
+        <h3>Viernes</h3>
+        <p class="time">8:30 PM</p>
+        <span class="tag">Noche de oración</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="social-section">
+    <h2 class="reveal">Síguenos</h2>
+    <div class="social-grid">
+      <a href="https://youtube.com" target="_blank" class="social-card youtube reveal">
+        <img src="img/1.jpg" class="social-bg" alt="YouTube">
+        <div class="social-overlay">
+          <img src="img/yt.png" class="social-icon" alt="YouTube">
+        </div>
+      </a>
+
+      <a href="https://instagram.com" target="_blank" class="social-card instagram reveal">
+        <img src="img/3.jpg" class="social-bg" alt="Instagram">
+        <div class="social-overlay">
+          <img src="img/ig.png" class="social-icon" alt="Instagram">
+        </div>
+      </a>
+
+      <a href="https://facebook.com" target="_blank" class="social-card facebook reveal">
+        <img src="img/2.jpg" class="social-bg" alt="Facebook">
+        <div class="social-overlay">
+          <img src="img/fb.png" class="social-icon" alt="Facebook">
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section id="ubicacion" class="light-section">
+    <h2 class="reveal">Encuéntranos</h2>
+    <p class="location-text reveal">
+      Lic. José López Portillo 704, Joyas de Anáhuac, Escobedo, N.L.
+    </p>
+    <div class="map-container reveal">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3592.9416414753896!2d-100.29276282507257!3d25.7724910773451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86629300575617e5%3A0xd16ed679dd62d6c2!2sIglesia%20lighting!5e0!3m2!1ses-419!2smx!4v1779151434003!5m2!1ses-419!2smx" 
+        width="100%" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </section>
+
+  <footer id="contacto">
+    <div class="footer-brand">
+      <img src="LOGOS/PRINWH.png" alt="Lighting Logo" class="footer-logo">
+      <p class="footer-tagline">La iglesia de la ciudad</p>
+    </div>
+    <div class="footer-separator"></div>
+    <p class="copyright">© 2026 Lighting. Monterrey, Nuevo León.</p>
+  </footer>
+
+  <a href="https://wa.me/5210000000000" class="whatsapp-btn" target="_blank" aria-label="Contacto por WhatsApp">
+    <svg viewBox="0 0 32 32" class="whatsapp-svg">
+      <path d="M16 2a13.93 13.93 0 0 0-12 21l-1.9 6.9 7.1-1.9a13.93 13.93 0 1 0 6.8-26z" fill="#25d366"/>
+      <path d="M22.5 20.3c-.3-.1-1.7-.8-2-1-.3-.1-.5-.1-.7.2l-1 1.2c-.2.2-.5.3-.8.1a10.4 10.4 0 0 1-3.8-2.5 11.2 11.2 0 0 1-2.5-3.1c-.2-.3-.1-.6.1-.8l.4-.4.3-.4c.1-.2.1-.4 0-.6l-1-2.4c-.3-.7-.6-.7-.8-.7h-.7c-.3 0-.7.1-1 .5a4.3 4.3 0 0 0-1.4 3.2 7.6 7.6 0 0 0 1.6 4.1 17.2 17.2 0 0 0 6.6 5.8c4 1.6 4.9 1.3 5.7 1.2a4.9 4.9 0 0 0 3.3-2.3c.3-.9.3-1.7.2-1.9z" fill="#fff"/>
+    </svg>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
