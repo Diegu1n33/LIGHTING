@@ -1,0 +1,760 @@
+/* =========================
+   VARIABLES & DESIGN SYSTEM
+========================= */
+:root {
+  --primary: #111827;
+  --accent: #3b82f6;
+  --bg-main: #f8fafc;
+  --text-dark: #111827;
+  --text-muted: #6b7280;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --radius-lg: 30px;
+  --radius-md: 20px;
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================
+   RESET & BASE STYLES
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-main);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* CONTAINER UTILITIES */
+.container-narrow {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* =========================
+   INTRO APPLE STYLE
+========================= */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  animation: introFade 1.2s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+  animation-delay: 4.2s;
+}
+
+.light-bg {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.95) 0%,
+    rgba(255,255,255,0.2) 40%,
+    rgba(255,255,255,0) 70%
+  );
+  border-radius: 50%;
+  filter: blur(25px);
+  animation: lightExpand 3s cubic-bezier(.16,.84,.44,1) forwards;
+}
+
+.intro-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.lighting-text {
+  font-size: clamp(3rem, 10vw, 6.5rem);
+  font-weight: 700;
+  color: white;
+  letter-spacing: 12px;
+  opacity: 0;
+  text-shadow: 0 0 30px rgba(255,255,255,0.3);
+  animation: textReveal 1.5s cubic-bezier(.16,.84,.44,1) forwards;
+  animation-delay: .3s;
+}
+
+.line {
+  width: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.6);
+  margin: 25px auto;
+  animation: lineExpand 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.2s;
+}
+
+.intro-sub {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.95rem;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: subReveal 1.2s ease forwards;
+  animation-delay: 1.9s;
+}
+
+/* =========================
+   NAVBAR & GLASSMORPHISM
+========================= */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 50px; /* Reducimos padding porque el logo ahora ocupará más espacio */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: var(--transition-smooth);
+}
+
+nav.scrolled {
+  padding: 5px 50px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.logo-img {
+  /* Subimos la altura dramáticamente para compensar el espacio transparente de la imagen */
+  height: 140px; 
+  width: auto;
+  object-fit: contain;
+  transition: var(--transition-smooth);
+  margin-top: -15px; /* Ajuste sutil para centrarlo visualmente */
+}
+
+nav.scrolled .logo-img {
+  height: 110px; /* Se hace un poco más pequeño al hacer scroll */
+}
+
+nav ul {
+  display: flex;
+  gap: 35px;
+  list-style: none;
+  align-items: center;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 400;
+  font-size: 0.95rem;
+  opacity: 0.8;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -6px;
+  left: 0;
+  background-color: var(--text-dark);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+nav a:hover {
+  opacity: 1;
+}
+
+nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* HAMBURGER MENU */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 1010;
+}
+
+.menu-toggle span {
+  width: 28px;
+  height: 2px;
+  background: var(--text-dark);
+  transition: var(--transition-smooth);
+  border-radius: 2px;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 140px 24px;
+  background: radial-gradient(circle at top, #ffffff 0%, #f8fafc 50%, #edf2f7 100%);
+}
+
+.hero-content {
+  max-width: 850px;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -2px;
+  line-height: 1.1;
+  margin-bottom: 25px;
+  color: var(--text-dark);
+}
+
+.hero p {
+  color: var(--text-muted);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hero-buttons {
+  margin-top: 45px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Animaciones CSS puras para el Hero (Sincronizadas con la intro de 5s) */
+.hero-title {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 5.2s; /* Aparece justo cuando se quita la intro */
+}
+
+.hero-desc {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 5.4s;
+}
+
+.hero-buttons {
+  margin-top: 45px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroFadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 5.6s;
+}
+
+@keyframes heroFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ajuste móvil para el logo */
+@media (max-width: 768px) {
+  .logo-img {
+    height: 110px; 
+    margin-top: -5px;
+  }
+  nav.scrolled .logo-img {
+    height: 90px;
+  }
+}
+
+/* =========================
+   BUTTONS SYSTEM
+========================= */
+.btn, .btn-outline {
+  display: inline-block;
+  text-decoration: none;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn {
+  background: var(--text-dark);
+  color: white;
+  border: 1px solid var(--text-dark);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.14);
+  background: #232d3f;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(17, 24, 39, 0.2);
+  color: var(--text-dark);
+}
+
+.btn-outline:hover {
+  background: rgba(17, 24, 39, 0.04);
+  border-color: var(--text-dark);
+  transform: translateY(-3px);
+}
+
+/* =========================
+   SECTIONS LAYOUT
+========================= */
+section {
+  padding: 120px 24px;
+  text-align: center;
+}
+
+section h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 50px;
+}
+
+.light-section {
+  background: white;
+}
+
+/* Glassmorphism Section Mod */
+.glass-section {
+  background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
+}
+
+/* =========================
+   CARDS & GLASSMORPHISM UI
+========================= */
+.card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+  transition: var(--transition-smooth);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  padding: 45px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+  font-size: 1.2rem;
+  color: #1e293b;
+  font-style: italic;
+}
+
+/* Horarios Grid Cards */
+.grid {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.schedule-card {
+  flex: 1;
+  min-width: 280px;
+  padding: 40px 30px;
+  border: 1px solid rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.schedule-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.06);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.schedule-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.time {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+
+.tag {
+  background: #eff6ff;
+  color: var(--accent);
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* =========================
+   SOCIAL MEDIA SECTION
+========================= */
+.social-section {
+  background: white;
+  padding: 120px 24px;
+}
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-card {
+  position: relative;
+  height: 420px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: block;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+  transition: var(--transition-smooth);
+}
+
+.social-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+}
+
+.social-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.05) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition-smooth);
+}
+
+.social-icon {
+  width: 70px;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.9;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.25));
+  transition: var(--transition-smooth);
+}
+
+/* Hovers de Redes */
+.social-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+}
+
+.social-card:hover .social-bg {
+  transform: scale(1.06);
+  filter: brightness(0.85);
+}
+
+.social-card:hover .social-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 100%);
+}
+
+.social-card:hover .social-icon {
+  transform: scale(1.12);
+}
+
+/* =========================
+   UBICACIÓN (MAPA)
+========================= */
+.location-text {
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: -20px auto 45px auto;
+  font-size: 1.1rem;
+}
+
+.map-container {
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.07);
+  border: 1px solid rgba(0,0,0,0.02);
+}
+
+.map-container iframe {
+  width: 100%;
+  display: block;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+  background: var(--primary);
+  color: white;
+  padding: 80px 24px 50px 24px;
+  text-align: center;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo {
+  height: 150px;
+  width: auto;
+}
+
+.footer-tagline {
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.footer-separator {
+  width: 60px;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  margin: 40px auto;
+}
+
+.copyright {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.85rem;
+}
+
+/* =========================
+   WHATSAPP FLOATING BUTTON
+========================= */
+.whatsapp-btn {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  box-shadow: 0 10px 25px rgba(37,211,102,0.35);
+  transition: var(--transition-smooth);
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 15px 30px rgba(37,211,102,0.5);
+}
+
+.whatsapp-svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* Loading Spinner para Versículo */
+.spinner {
+  border: 2px solid rgba(0,0,0,0.05);
+  width: 24px;
+  height: 24px;
+  border-left-color: var(--accent);
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* =========================
+   ANIMATIONS KEYFRAMES
+========================= */
+@keyframes lightExpand {
+  0% { transform: scale(0); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: scale(20); opacity: 1; }
+}
+
+@keyframes textReveal {
+  0% { opacity: 0; transform: translateY(40px); filter: blur(8px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes lineExpand {
+  0% { width: 0; opacity: 0; }
+  100% { width: 180px; opacity: 1; }
+}
+
+@keyframes subReveal {
+  0% { opacity: 0; transform: translateY(15px); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes introFade {
+  0% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* =========================
+   RESPONSIVE DESIGN (MOBILE-FIRST OUT)
+========================= */
+@media (max-width: 768px) {
+  nav {
+    padding: 20px 24px;
+  }
+  
+  nav.scrolled {
+    padding: 15px 24px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* Animación del Hamburguesa a una 'X' */
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  nav ul {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.05);
+    transition: var(--transition-smooth);
+    z-index: 1005;
+  }
+
+  nav ul.active {
+    right: 0;
+  }
+
+  .map-container iframe {
+    height: 340px;
+  }
+
+  section {
+    padding: 80px 24px;
+  }
+}
+
+/* =========================
+   NUESTRA ESENCIA (FEATURES)
+========================= */
+.section-subtitle {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin-bottom: 50px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  padding: 40px 30px;
+  text-align: left; /* Alineación a la izquierda da un toque más editorial y premium */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid rgba(0,0,0,0.03);
+  background: white;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  background: #f1f5f9;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.feature-card h3 {
+  font-size: 1.3rem;
+  color: var(--text-dark);
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Ajuste móvil para alinear al centro en pantallas pequeñas */
+@media (max-width: 768px) {
+  .feature-card {
+    text-align: center;
+    align-items: center;
+  }
+}
