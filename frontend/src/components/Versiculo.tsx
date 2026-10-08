@@ -1,14 +1,32 @@
+import { useVersiculo } from "../hooks/useContenido.ts";
 
 export function Versiculo() {
+    const {
+        data: versiculo,
+        isPending,
+        isError,
+    } = useVersiculo();
+
+    if (isPending) {
+        return (
+            <section className="verse-section">
+                <p>Cargando versículo...</p>
+            </section>
+        );
+    }
+
+    if (isError || !versiculo) {
+        return (
+            <section className="verse-section">
+                <p>No se pudo cargar el versículo.</p>
+            </section>
+        );
+    }
+
     return (
-        <section id="versiculo" className="glass-section">
-            <div className="container-narrow">
-                <h2 className="reveal">Versículo del día</h2>
-                <div className="card glass-card reveal" id="versiculoTexto">
-                    <div className="spinner"></div>
-                    <span>Cargando versículo...</span>
-                </div>
-            </div>
+        <section className="verse-section">
+            <p>{versiculo.texto}</p>
+            <span>{versiculo.referencia}</span>
         </section>
     );
 }
