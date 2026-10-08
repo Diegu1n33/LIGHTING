@@ -4,32 +4,68 @@ import img2 from "../assets/img/2.jpg";
 import fb from "../assets/img/fb.png";
 import img1 from "../assets/img/1.jpg";
 import yt from "../assets/img/yt.png";
+import { useRedes } from "../hooks/useContenido.ts";
+
+const ESTILO = {
+    youtube: {
+        clase: "youtube",
+        fondo: img1,
+        icono: yt,
+    },
+    instagram: {
+        clase: "instagram",
+        fondo: img3,
+        icono: ig,
+    },
+    facebook: {
+        clase: "facebook",
+        fondo: img2,
+        icono: fb,
+    },
+};
 
 export function Redes() {
+    const { data: redes, isPending, isError } = useRedes();
+
     return (
         <section className="social-section">
             <h2 className="reveal">Síguenos</h2>
+
+            {isPending && <p>Cargando redes...</p>}
+            {isError && <p>Error al cargar las redes.</p>}
+
             <div className="social-grid">
-                <a href="https://youtube.com" target="_blank" className="social-card youtube reveal">
-                    <img src={img1} className="social-bg" alt="YouTube" loading="lazy"/>
-                    <div className="social-overlay">
-                        <img src={yt} className="social-icon" alt="YouTube" loading="lazy"/>
-                    </div>
-                </a>
+                {redes?.map((red) => {
+                    const estilo = ESTILO[red.tipo];
 
-                <a href="https://instagram.com" target="_blank" className="social-card instagram reveal">
-                    <img src={img3} className="social-bg" alt="Instagram" loading="lazy"/>
-                    <div className="social-overlay">
-                        <img src={ig} className="social-icon" alt="Instagram" loading="lazy"/>
-                    </div>
-                </a>
+                    if (!estilo) return null;
 
-                <a href="https://facebook.com" target="_blank" className="social-card facebook reveal">
-                    <img src={img2} className="social-bg" alt="Facebook" loading="lazy"/>
-                    <div className="social-overlay">
-                        <img src={fb} className="social-icon" alt="Facebook" loading="lazy"/>
-                    </div>
-                </a>
+                    return (
+                        <a
+                            key={red.tipo}
+                            href={red.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`social-card ${estilo.clase} reveal`}
+                        >
+                            <img
+                                src={estilo.fondo}
+                                className="social-bg"
+                                alt={red.nombre}
+                                loading="lazy"
+                            />
+
+                            <div className="social-overlay">
+                                <img
+                                    src={estilo.icono}
+                                    className="social-icon"
+                                    alt={red.nombre}
+                                    loading="lazy"
+                                />
+                            </div>
+                        </a>
+                    );
+                })}
             </div>
         </section>
     );
