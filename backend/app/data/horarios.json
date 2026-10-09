@@ -1,0 +1,5 @@
+
+[
+  { "id": 1, "dia": "Domingo", "hora": "11:00 AM", "etiqueta": "Reunión General", "icono": "☀️" },
+  { "id": 2, "dia": "Viernes", "hora": "8:30 PM", "etiqueta": "Reunión de oración", "icono": "🌙" }
+]
