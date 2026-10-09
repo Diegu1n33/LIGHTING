@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "sync:data": "mkdir -p public/data && cp ../backend/app/data/*.json public/data/",
+    "build:static": "VITE_STATIC=true vite build",
     "lint": "oxlint",
     "preview": "vite preview"
   },

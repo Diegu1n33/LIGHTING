@@ -1,23 +1,35 @@
-//import {Redes} from ../components/Redes.tsx;
-//const BASE_URL = import.meta.env.VITE_API_URL;"
-//export const getContenido = async () => {"
-//   const res = await fetch(`${BASE_URL}/api/contenido`);"
-//    if (!res.ok) throw new Error('Error al obtener datos');"
-//    return res.json();}
+import type { Contacto, Horario, Red, Versiculo } from "../types";
 
-import type { Contacto, Horario, Red, Versiculo} from "../types.ts";
+const ESTATICO = import.meta.env.VITE_STATIC === "true";
 
-async function get<T>(ruta: string): Promise<T> {
-    const res = await fetch(`/api/${ruta}`);
-    if (!res.ok) {
-        throw new Error(`Error ${res.status} en ${ruta}`);
-    }
-    return res.json();
+function urlDe(recurso: string): string {
+  return ESTATICO
+    ? `${import.meta.env.BASE_URL}data/${recurso}.json`
+    : `/api/${recurso}`;
+}
+
+async function get<T>(recurso: string): Promise<T> {
+  const res = await fetch(urlDe(recurso));
+  if (!res.ok) throw new Error(`Error ${res.status} en ${recurso}`);
+  return res.json();
+}
+
+async function versiculoDelDia(): Promise<Versiculo> {
+  if (!ESTATICO) return get<Versiculo>("versiculo");
+
+  const lista = await get<Versiculo[]>("versiculos");
+  if (lista.length === 0) throw new Error("No hay versículos");
+
+  const hoy = new Date();
+  const dia = Math.floor(
+    Date.UTC(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()) / 86_400_000,
+  );
+  return lista[dia % lista.length];
 }
 
 export const api = {
-    versiculo: () => get<Versiculo>("versiculo"),
-    horarios: () => get<Horario[]>("horarios"),
-    redes: () => get<Red[]>("redes"),
-    contacto: () => get<Contacto>("contacto"),
-}
+  versiculo: versiculoDelDia,
+  horarios: () => get<Horario[]>("horarios"),
+  redes: () => get<Red[]>("redes"),
+  contacto: () => get<Contacto>("contacto"),
+};
